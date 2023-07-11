@@ -1,0 +1,26 @@
+""" EXERCISER DA UDEMY DEEPCOPY, ORDER E RISE THE PRICE
+IN DICTIONARY"""
+import copy
+
+products = [
+    {'nome': 'Produto 5', 'preco': 10.00},
+    {'nome': 'Produto 1', 'preco': 22.32},
+    {'nome': 'Produto 3', 'preco': 10.11},
+    {'nome': 'Produto 2', 'preco': 105.87},
+    {'nome': 'Produto 4', 'preco': 69.90},
+]
+
+new_products = [
+    {**product, 'preco': round(product['preco'] * 1.25, 2)}
+    for product in copy.deepcopy(products)
+]
+
+order_by_name = sorted(new_products, key=lambda product: product['nome'])
+
+print(*products, sep='\n')
+print(15 * '=-')
+print(15 * '=-')
+print(*new_products, sep='\n')
+print(15 * '=-')
+print(15 * '=-')
+print(*order_by_name, sep='\n')
