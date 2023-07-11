@@ -1,0 +1,13 @@
+def greeting(greet):
+    def greet_people(name):
+        return f'{greet}, {name}'
+    return greet_people
+
+
+say_good_morning = greeting('Good morning')
+say_good_afternoon = greeting('Good afternoon')
+
+names = ['Maria', 'Carlos', 'Alberto', 'Antonio', 'Cruz', 'Jade', 'Fox']
+for name in names:
+  print(say_good_morning(name))
+  print(say_good_afternoon(name))
