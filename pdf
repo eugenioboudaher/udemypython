@@ -1,0 +1,29 @@
+from pathlib import Path
+from PyPDF2 import PdfReader, PdfWriter, PdfMerger
+
+originais = Path(__file__).parent
+BACEN = originais / 'focus.pdf'
+PASTA_NOVA = originais / 'arquivos novos'
+PASTA_NOVA.mkdir(exist_ok=True)
+
+reader = PdfReader(BACEN)
+
+
+for i, page in enumerate(reader.pages):
+    writer = PdfWriter()
+    with open(PASTA_NOVA / f'page_{i}.pdf', 'wb') as arquivo:
+        writer.add_page(page)
+        writer.write(arquivo)
+
+
+
+files = [
+    PASTA_NOVA / 'page_0.pdf',
+    PASTA_NOVA / 'page_1.pdf',
+]
+merger = PdfMerger()
+for file in files:
+    merger.append(file)
+
+with open(PASTA_NOVA / 'merged.pdf', 'wb') as arquivo:
+    merger.write(arquivo)
